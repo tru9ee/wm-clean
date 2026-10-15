@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Metadata & Watermark Cleaner</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Metadata &amp; Watermark Cleaner</h1>
+    <p class="sub">Strips C2PA, EXIF, XMP, IPTC, ICC, PNG chunks. Re-encodes pixels. Runs 100% in your browser.</p>
+  </header>
+
+  <section class="drop" id="drop">
+    <input type="file" id="file" accept="image/*" hidden>
+    <p>Drag an image here, or <button id="pick" type="button">choose a file</button></p>
+  </section>
+
+  <section class="controls" hidden id="controls">
+    <label>JPEG quality
+      <input type="range" id="quality" min="60" max="100" value="92">
+      <span id="qval">92</span>
+    </label>
+
+    <label>Noise strength
+      <input type="range" id="noise" min="0" max="6" step="0.5" value="2">
+      <span id="nval">2.0</span>
+    </label>
+
+    <label>Resize
+      <input type="number" id="width" min="64" max="8000" placeholder="auto">
+      ×
+      <input type="number" id="height" min="64" max="8000" placeholder="auto">
+    </label>
+
+    <label>Format
+      <select id="format">
+        <option value="image/jpeg">JPEG</option>
+        <option value="image/png">PNG</option>
+        <option value="image/webp">WEBP</option>
+      </select>
+    </label>
+
+    <label class="check">
+      <input type="checkbox" id="grayscale"> Convert to grayscale
+    </label>
+
+    <label class="check">
+      <input type="checkbox" id="stripall" checked> Strip all metadata (recommended)
+    </label>
+
+    <div class="buttons">
+      <button id="clean" type="button" class="primary">Clean &amp; Download</button>
+      <button id="reset" type="button">Reset</button>
+    </div>
+  </section>
+
+  <section class="preview" hidden id="preview">
+    <h2>Preview</h2>
+    <div class="grid">
+      <div>
+        <h3>Original</h3>
+        <img id="origImg" alt="original">
+        <p class="meta" id="origMeta"></p>
+      </div>
+      <div>
+        <h3>Cleaned</h3>
+        <img id="newImg" alt="cleaned">
+        <p class="meta" id="newMeta"></p>
+      </div>
+    </div>
+    <p class="download" id="downloadWrap" hidden>
+      <a id="download" download>Download cleaned image</a>
+    </p>
+  </section>
+
+  <footer>
+    <p>All processing happens locally. No uploads. No server. No logs.</p>
+  </footer>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
